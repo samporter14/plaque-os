@@ -1,0 +1,66 @@
+name: Bug Report
+description: Report an issue or unexpected behavior
+title: "Short, descriptive title of the issue"
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this bug! Please fill out the details below.
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      description: Which device does this happen on? Plaque OS is tested only on the X4 Pro. The X4 Classic build has never run on real Classic hardware.
+      options:
+        - Xteink X4 Pro
+        - Xteink X4 Classic
+        - Other / not listed
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Affected Version
+      description: What version of the project/library are you using? (the firmware line in Settings > About, for example 1.6.5-x4pro+abc1234.main)
+      placeholder: Ex. 1.6.5-x4pro+abc1234.main
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+      placeholder:
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Clearly list the steps necessary to reproduce the unexpected behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Select '...'
+        3. Crash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output/Screenshots
+      description: If applicable, error messages, or log output to help explain your problem. You can drag and drop images here.
+      render: shell

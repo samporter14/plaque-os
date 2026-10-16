@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7f2">
+  <meta name="description" content="A private note, drawing or photo for your e-ink reader.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+  <title>Desk Notes</title>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <a class="brand" href="/" aria-label="Desk Notes home"><img src="/icon.svg" alt="" width="34" height="34"> Desk Notes</a>
+      <button id="logout" class="quiet" hidden>Sign out</button>
+    </header>
+    <section class="intro">
+      <p class="eyebrow">A LITTLE SOMETHING, WAITING</p>
+      <h1>Send a little note.</h1>
+      <p>Something to find on the reader the next time it wakes.</p>
+    </section>
+    <section id="login-panel" class="card login">
+      <h2>Your private mailbox</h2>
+      <p>Use your sender secret to leave a note.</p>
+      <form id="login-form">
+        <label for="secret">Sender secret</label>
+        <input id="secret" type="password" autocomplete="current-password" required>
+        <button class="primary" type="submit">Open mailbox</button>
+      </form>
+    </section>
+    <section id="composer" hidden>
+      <div class="workspace">
+        <section class="card editor" aria-label="Create a note">
+          <div class="tabs" role="group" aria-label="Message type">
+            <button data-mode="text" aria-pressed="true">Text</button>
+            <button data-mode="draw" aria-pressed="false">Draw</button>
+            <button data-mode="photo" aria-pressed="false">Photo</button>
+          </div>
+          <div id="text-panel" class="mode-panel">
+            <label for="note">What would you like to say?</label>
+            <textarea id="note" maxlength="800" rows="7" placeholder="hello.&#10;see you soon"></textarea>
+            <p class="hint">Short notes have more room to breathe.</p>
+          </div>
+          <div id="draw-panel" class="mode-panel" hidden>
+            <label for="drawing">Make a little doodle</label>
+            <canvas id="drawing" width="800" height="480" aria-label="Drawing area, 800 by 480 pixels"></canvas>
+            <div class="drawing-tools">
+              <label for="brush">Pen <input id="brush" type="range" min="2" max="24" value="6"></label>
+              <button id="clear" class="quiet" type="button">Clear drawing</button>
+            </div>
+          </div>
+          <div id="photo-panel" class="mode-panel" hidden>
+            <label for="photo">Choose a photo</label>
+            <input id="photo" type="file" accept="image/*">
+            <label for="fit">Picture framing</label>
+            <select id="fit"><option value="fit">Fit whole photo</option><option value="crop">Fill frame, crop the edges</option></select>
+            <p class="hint">Bright photos with clear shapes work especially well.</p>
+          </div>
+          <button id="preview" class="secondary" type="button">Preview on the frame</button>
+        </section>
+        <section class="preview-area" aria-label="Prepared frame preview">
+          <div class="preview-heading"><h2>On the reader</h2><span>800 × 480</span></div>
+          <div class="frame">
+            <div id="empty-preview"><span aria-hidden="true">♡</span><p>Your note will appear here.</p></div>
+            <img id="preview-image" alt="Prepared black and white message" hidden>
+          </div>
+          <p class="hint">This is the exact black and white image the frame receives.</p>
+          <button id="send" class="primary" disabled type="button">Send to the frame <span aria-hidden="true">↗</span></button>
+          <p class="delivery">It will appear the next time the frame checks.</p>
+        </section>
+      </div>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <footer>Notes can wait. Go enjoy your day.</footer>
+  </main>
+</body>
+</html>

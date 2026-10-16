@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.16)
+project(firmware_board_tag_host_tests CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+enable_testing()
+get_filename_component(REPO_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+# FirmwareBoardTag.cpp built as each Plaque board's firmware: the X4 Pro's must refuse an X4 Classic image, and the
+# other way round. The stub BoardConfig.h stands in for the SDK's; the board comes from the build flag, as on the device.
+foreach(board x4pro x4c)
+  if(board STREQUAL "x4pro")
+    set(device_flag FREEINK_DEVICE_X4PRO=1)
+    set(other "x4c")
+  else()
+    set(device_flag FREEINK_DEVICE_X4CLASSIC=1)
+    set(other "x4pro")
+  endif()
+  add_executable(FirmwareBoardTagTest_${board} FirmwareBoardTagTest.cpp "${REPO_ROOT}/src/network/FirmwareBoardTag.cpp")
+  target_include_directories(FirmwareBoardTagTest_${board} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/stubs" "${REPO_ROOT}/src")
+  target_compile_definitions(FirmwareBoardTagTest_${board} PRIVATE ${device_flag} EXPECTED_BOARD="${board}"
+                                                                   OTHER_BOARD="${other}")
+  target_compile_options(FirmwareBoardTagTest_${board} PRIVATE -Wall -Wextra -pedantic)
+  add_test(NAME FirmwareBoardTag_${board} COMMAND FirmwareBoardTagTest_${board})
+endforeach()

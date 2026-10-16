@@ -1,0 +1,14 @@
+# The X4 Classic's partition table, from the FreeInk SDK documentation
+# (freeink-sdk/docs/xteink-x4c-support.md, "Partitions": nvs@0x9000, otadata@0xE000,
+# app0@0x10000, app1@0x7F0000, spiffs@0xFD0000, coredump@0xFE4000, 16 MB), each size
+# being the gap to the next offset. It equals the X4 Pro's table but is kept separate.
+# NOT read from a real X4 Classic: before any flashing, read 0x8000 from the reader
+# (esptool read_flash 0x8000 0xC00) and compare it with this file. Flashing writes
+# only the app slot, so this file must match what is on the device.
+# Name,   Type, SubType,  Offset,   Size,     Flags
+nvs,      data, nvs,      0x9000,   0x5000,
+otadata,  data, ota,      0xe000,   0x2000,
+app0,     app,  ota_0,    0x10000,  0x7e0000,
+app1,     app,  ota_1,    0x7f0000, 0x7e0000,
+spiffs,   data, spiffs,   0xfd0000, 0x14000,
+coredump, data, coredump, 0xfe4000, 0x1c000,

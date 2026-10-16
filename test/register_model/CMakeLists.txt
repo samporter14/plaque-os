@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
+project(register_model_host_tests CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+enable_testing()
+get_filename_component(REPO_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+# Pure logic over RegisterData.h's structs: no JSON, no Arduino.
+add_executable(RegisterModelTest RegisterModelTest.cpp "${REPO_ROOT}/src/ambient/RegisterModel.cpp")
+target_include_directories(RegisterModelTest PRIVATE "${REPO_ROOT}/src/ambient")
+target_compile_options(RegisterModelTest PRIVATE -Wall -Wextra -pedantic)
+add_test(NAME RegisterModel COMMAND RegisterModelTest)

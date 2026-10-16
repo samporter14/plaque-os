@@ -1,0 +1,48 @@
+name: Feature Request
+description: Propose a new feature, enhancement, or change to Plaque OS
+title: "Short, descriptive title of the request"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to propose a change to Plaque OS.
+
+        Plaque OS is a small, personal fork of CrossPoint Reader for the Xteink X4 Pro. Features that belong in the
+        general-purpose reader are better proposed to
+        [CrossPoint Reader](https://github.com/crosspoint-reader/crosspoint-reader). Method, Register, Messages and
+        the university Wi-Fi profiles are specific to this fork.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this solves
+      description: What user-facing problem or reading-experience gap does this address? Be concrete.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: A short description of what you would build or change. Focus on user impact; implementation details can come later.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Memory / flash / complexity cost
+      description: |
+        The firmware runs on a small RAM budget. Roughly how much DRAM, flash, or code complexity does this add?
+        "Don't know" is a valid answer.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Anything else relevant (links, screenshots, related discussions).
+    validations:
+      required: false

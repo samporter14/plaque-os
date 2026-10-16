@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
+project(home_layout_host_tests CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+enable_testing()
+get_filename_component(REPO_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+# Header-only: the real theme metric tables, the built-in UI font and the shared row-fit arithmetic.
+add_executable(HomeLayoutTest HomeLayoutTest.cpp)
+target_include_directories(HomeLayoutTest PRIVATE "${REPO_ROOT}/src" "${REPO_ROOT}/lib/EpdFont" "${REPO_ROOT}/lib")
+target_compile_options(HomeLayoutTest PRIVATE -Wall -Wextra -pedantic)
+add_test(NAME HomeMenuFitsEveryTheme COMMAND HomeLayoutTest)

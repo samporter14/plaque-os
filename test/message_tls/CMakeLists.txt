@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
+project(MessageTlsRegression LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+if(NOT DEFINED MBEDTLS_SOURCE OR NOT DEFINED MBEDTLS_BUILD)
+  message(FATAL_ERROR "Pass MBEDTLS_SOURCE and MBEDTLS_BUILD for date-disabled Mbed TLS 3.6.6")
+endif()
+add_executable(MessageTlsTest MessageTlsTest.cpp ../../src/network/CertificateDates.cpp ../../src/network/ClockProvenance.cpp
+  ../../src/network/MessageTls.cpp)
+target_include_directories(MessageTlsTest PRIVATE stubs ../../src ../../lib/TrustedTime "${MBEDTLS_SOURCE}/include")
+target_link_libraries(MessageTlsTest PRIVATE "${MBEDTLS_BUILD}/library/libmbedtls.a" "${MBEDTLS_BUILD}/library/libmbedx509.a" "${MBEDTLS_BUILD}/library/libmbedcrypto.a")
+target_compile_options(MessageTlsTest PRIVATE -Wall -Wextra -Werror)

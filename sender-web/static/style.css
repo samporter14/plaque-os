@@ -1,0 +1,52 @@
+:root { color-scheme: light; --paper: #faf7f2; --ink: #34302e; --muted: #79716b; --rose: #864e53; --line: #e7dfd5; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+main { max-width: 1120px; padding: 28px 40px 20px; margin: auto; }
+.masthead { display: flex; justify-content: space-between; align-items: center; }
+.brand { color: var(--ink); display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -.4px; }
+.intro { margin: 54px 0 30px; }
+.eyebrow { font-size: 11px; color: var(--rose); font-weight: 650; letter-spacing: 1.8px; margin-bottom: 10px; }
+h1 { margin: 0; font: 500 clamp(34px, 5vw, 48px)/1.18 Georgia, serif; letter-spacing: -1.4px; }
+.intro > p:last-child { color: var(--muted); margin: 12px 0 0; }
+h2 { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
+.card { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: #fffdf9; }
+.login { max-width: 490px; }
+.login p { color: var(--muted); }
+.login input { margin-bottom: 18px; }
+.workspace { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: start; }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: -8px 0 24px; padding-bottom: 12px; }
+.tabs button { color: var(--muted); border: 0; background: transparent; padding: 9px 20px; }
+.tabs button[aria-pressed="true"] { background: #f1e6e2; color: var(--rose); }
+button { cursor: pointer; border-radius: 10px; font: inherit; font-weight: 550; padding: 11px 18px; transition: background .15s; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #b78888; outline-offset: 3px; }
+button:disabled { cursor: default; opacity: .45; }
+.primary { color: white; background: var(--rose); border: 1px solid var(--rose); }
+.primary:hover:not(:disabled) { background: #704247; }
+.secondary { background: transparent; color: var(--rose); border: 1px solid #cbb4ac; width: 100%; margin-top: 8px; }
+.quiet { background: transparent; border: 1px solid var(--line); color: var(--muted); font-size: 13px; padding: 7px 11px; }
+label { display: block; font-size: 13px; font-weight: 550; margin-bottom: 10px; }
+input[type="password"], textarea, select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding: 13px; background: white; color: var(--ink); font: inherit; }
+textarea { resize: vertical; font-size: 20px; line-height: 1.5; min-height: 240px; }
+textarea::placeholder { color: #b2a8a0; }
+input[type="file"] { width: 100%; margin: 4px 0 28px; }
+.hint { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.preview-heading { display: flex; align-items: baseline; justify-content: space-between; margin: 4px 0 18px; }
+.preview-heading h2 { margin: 0; }
+.preview-heading span { color: #999087; font-size: 11px; }
+.frame { background: #292929; padding: 18px; border-radius: 15px; box-shadow: 0 12px 25px #3a2c2312; }
+.frame img { display: block; width: 100%; aspect-ratio: 5/3; object-fit: contain; background: white; image-rendering: auto; }
+#empty-preview { background: #f1eee5; aspect-ratio: 5/3; display: flex; justify-content: center; align-items: center; flex-direction: column; color: #a49a8f; }
+#empty-preview span { font: 38px Georgia, serif; }
+#empty-preview p { font-size: 13px; }
+#send { margin-top: 14px; width: 100%; display: flex; justify-content: space-between; }
+.delivery { text-align: center; color: var(--muted); font-size: 12px; }
+#drawing { display: block; width: 100%; border: 1px solid var(--line); border-radius: 8px; touch-action: none; background: white; aspect-ratio: 5/3; }
+.drawing-tools { margin: 14px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.drawing-tools label { margin: 0; display: flex; gap: 10px; align-items: center; }
+input[type="range"] { width: 100px; accent-color: var(--rose); }
+#status { min-height: 24px; color: var(--rose); font-size: 14px; margin-top: 25px; }
+#status[data-error="true"] { color: #a63232; }
+footer { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 30px; color: #a1988f; font-size: 12px; }
+@media (max-width: 750px) { main { padding: 22px 20px; } .intro { margin-top: 38px; } .workspace { grid-template-columns: 1fr; gap: 28px; } .card { padding: 20px; } textarea { min-height: 180px; } .frame { padding: 15px; } }
+@media (prefers-reduced-motion: reduce) { button { transition: none; } }

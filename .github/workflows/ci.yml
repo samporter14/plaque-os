@@ -1,0 +1,53 @@
+name: CI
+
+# Builds both Plaque OS images and runs the Python guards. It needs no secrets and uploads nothing: firmware images
+# are GPL combined works (see NOTICE) and are deliberately not published as artifacts. The host gtest suites are run
+# by hand (README, "Tests"); they need a host Mbed TLS.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-guards:
+    name: Build x4pro and x4c, run the guards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install PlatformIO and build dependencies
+        run: |
+          python -m pip install -r requirements-build.txt
+
+      - name: Cache PlatformIO packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-plaque-${{ runner.os }}-${{ hashFiles('platformio.ini', 'requirements-build.txt') }}
+
+      # One environment at a time: two at once race on .cache/.sconsign.
+      - name: Build x4pro
+        run: pio run -e x4pro
+
+      - name: Check the x4pro image
+        run: python test/check_firmware_image.py --board x4pro .pio/build/x4pro/firmware.bin
+
+      - name: Build x4c
+        run: pio run -e x4c
+
+      - name: Check the x4c image
+        run: python test/check_firmware_image.py --board x4c .pio/build/x4c/firmware.bin
+
+      - name: Python guards
+        run: |
+          set -e
+          for f in test/test_*.py; do echo "== $f"; python "$f"; done

@@ -1,0 +1,58 @@
+Plaque OS
+Copyright (c) 2026 Plaque authors
+
+Plaque OS is released under the MIT License (see LICENSE). It is a modified
+version of CrossPoint Reader 1.6.5, Copyright (c) 2025 CrossPoint Reader
+organization, also under the MIT License:
+https://github.com/crosspoint-reader/crosspoint-reader
+
+Plaque OS is not affiliated with, endorsed by, or supported by Xteink,
+CrossPoint Reader, or any device manufacturer.
+
+The hardware layer comes from the FreeInk SDK (MIT, Copyright (c) 2026
+FreeInk), which this repository references as the git submodule freeink-sdk.
+The SDK carries its own NOTICE, which attributes parts of it to the OpenX4
+E-Paper Community SDK (MIT, Copyright (c) 2025 Open X4 E-Paper Contributors).
+Both notices are reproduced in THIRD_PARTY_NOTICES.md.
+
+---------------------------------------------------------------------------
+Firmware images built from this repository are combined works
+---------------------------------------------------------------------------
+
+The source code that is original to Plaque OS and CrossPoint Reader is MIT
+licensed. A firmware image (firmware.bin) built from this repository is not
+only that source. It links, among others:
+
+  - wolfSSL 5.7.2 (the Arduino-wolfSSL package), which is licensed under the
+    GNU General Public License, version 2 or (at your option) any later
+    version, or under a commercial licence from wolfSSL Inc.
+  - links2004/WebSockets 2.7.3, licensed under the GNU Lesser General Public
+    License, version 2.1 or later.
+  - the Arduino-ESP32 core (LGPL-2.1-or-later) and ESP-IDF (Apache-2.0).
+  - JPEGDEC and PNGdec (Apache-2.0).
+
+No commercial wolfSSL licence has been bought for this project. Therefore a
+firmware image built from this repository is a combined work that you may
+distribute only under the terms of the GNU General Public License, version 2
+or later, as well as the other licences above. The MIT licence of the Plaque
+OS and CrossPoint source does not cover the combined binary, and nothing in
+this repository gives you the right to distribute such an image under any
+other terms.
+
+Because ESP-IDF, JPEGDEC and PNGdec are Apache-2.0, which the Free Software
+Foundation treats as compatible with version 3 of the GPL but not with
+version 2 alone, the safe course when you distribute an image is to apply
+GPL version 3 or later (wolfSSL permits "any later version"). This note is
+the maintainer's reading, not legal advice.
+
+Corresponding source. This repository, at the commit or tag an image was built
+from, with the library versions pinned in platformio.ini and the build steps in
+README.md and requirements-build.txt, is the complete corresponding source of
+that image. If you distribute an image, you must offer the same source to its
+recipients (for example by linking this repository at the exact commit, or by
+shipping the source with the image). You can relink the image against modified
+LGPL libraries by editing the pinned library and rebuilding.
+
+The texts of the licences are in the LICENSES directory. The full list of
+components, versions, copyright holders and licences is in
+THIRD_PARTY_NOTICES.md.
